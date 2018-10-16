@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body ng-app>
+  <input type="text" ng-model='query'/>
+  <select ng-model='order'>
+    <option value="username">Organiser par nom</option>
+    <option value="content">Organiser par content</option>
+  </select>
+    <div ng-init="users=[
+      {username:'Jean-Charles', content:'Salut'},
+      {username:'Narjiss', content:'Holà'},
+      {username:'Fx', content:'Hello'},
+      {username:'Antoine', content:'Ciao'},
+      {username:'Valentine', content:'Coucou'}
+      ]">
+      <div ng-repeat="user in users | filter:query | orderBy:order">
+        <p>
+          <strong>{{user.username}}</strong>
+          <p>{{user.content}}</p>
+        </p>
+      </div>
+
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+</body>
+</html>
