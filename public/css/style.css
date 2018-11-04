@@ -1,0 +1,14 @@
+body {
+  padding-top:50px;
+}
+#content-views { position: relative;}
+.ng-enter, .ng-leave { width: 100px; position: absolute;}
+.ng-enter {
+  -webkit-animation:lightSpeedIn 1.2s both ease-in;
+  -moz-animation:lightSpeedIn 1.2s both ease-in;
+  animation:lightSpeedIn 1.2s both ease-in;
+}
+.ng-leave { -webkit-animation:lightSpeedOut 0.5s both ease-in;
+  -moz-animation:lightSpeedOut 0.5s both ease-in;
+  animation:lightSpeedOut 0.5s both ease-in;
+}
