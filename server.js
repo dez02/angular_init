@@ -1,41 +1,25 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const path = require('path');
-const adminRouter = express.Router();
-const apiRouter = express.Router();
-const User = require('./app/models/user');
-const jwt = require('jsonwebtoken');
-const superSecret = 'ilovescotchscotchyscotchscotch';
-
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const config = require('./config');
-
-// connect to our database 
-mongoose.connect(config.database, { useNewUrlParser: true });
-mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// configure our app to handle CORS requests
-app.use(function(req, res, next) {
-res.setHeader('Access-Control-Allow-Origin', '*');
-res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, \
-Authorization');
-next();
+app.use((req, res, next) => {
+ res.setHeader('Access-Control-Allow-Origin', '*');
+ res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+ res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, \
+ Authorization');
+ next();
 });
-// log all requests to the console
-app.use(morgan('dev'));
-// set the public folder to serve public assets
-app.use(express.static(__dirname + '/public'));
 
-// set up our one route to the index.html file
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/public/views/index.html'));
-});
+app.use(morgan('dev'));
+mongoose.connect(config.database, { useNewUrlParser: true, useCreateIndex: true });
 
 // admonRouter
 adminRouter.use(function(req, res, next) {
